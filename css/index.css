@@ -1,0 +1,36 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+svg {
+  margin-bottom: 50px;
+}
+
+.letter-boxes {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.letter-boxes > .box {
+  width: 60px;
+  height: 75px;
+  background-color: lightgray;
+  box-shadow: inset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.letter-boxes > .box > h1 {
+  font-size: 48px;
+}
