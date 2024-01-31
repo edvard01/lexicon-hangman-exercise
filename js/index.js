@@ -2,26 +2,30 @@ let counter = 0;
 let wordOfTheDay = "bananmåltid";
 let answer = wordOfTheDay.split("");
 let currentState = wordOfTheDay.split("");
+let gamestate = true;
 
 const svgPaths = document.querySelectorAll("path");
-console.log(svgPaths);
 const letterBoxes = document.querySelector(".letter-boxes");
 
 setup();
 
 const boxes = document.querySelectorAll(".box");
-console.log(boxes.length);
 
 document.addEventListener("keypress", (e) => {
-  let occurences = checkInput(e.key);
-  if (occurences.length === 0) {
-    svgPaths[counter].style.opacity = 1;
-    counter++;
-  } else {
-    occurences.forEach((element) => {
-      console.log(answer);
-      boxes[element].childNodes[0].innerHTML = answer[element];
-    });
+  if (gamestate) {
+    let occurences = checkInput(e.key);
+    if (occurences.length === 0) {
+      svgPaths[counter].style.opacity = 1;
+      counter++;
+      if (counter === svgPaths.length) {
+        gamestate = false;
+        gameOver();
+      }
+    } else {
+      occurences.forEach((element) => {
+        boxes[element].childNodes[0].innerHTML = answer[element].toUpperCase();
+      });
+    }
   }
 });
 
@@ -44,6 +48,10 @@ function checkInput(input) {
       currentState[index] = ".";
     }
   }
-  console.log(occurences);
   return occurences;
+}
+
+function gameOver() {
+  let html = "<h1>GAME OVER</h1>";
+  letterBoxes.innerHTML = html;
 }
