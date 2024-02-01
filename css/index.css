@@ -34,3 +34,13 @@ svg {
 .letter-boxes > .box > h1 {
   font-size: 48px;
 }
+
+.play-again > button {
+  background-color: lightgray;
+  padding: 20px 50px;
+  margin-top: 35px;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 1px 1px 5px;
+  display: none;
+}
