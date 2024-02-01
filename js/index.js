@@ -1,5 +1,208 @@
-import words from "./words.js";
-console.log(words);
+function initWords() {
+  return [
+    "whistle",
+    "captain",
+    "diamond",
+    "victory",
+    "laughter",
+    "triumph",
+    "giraffe",
+    "paradise",
+    "radiance",
+    "fantasy",
+    "whisper",
+    "harbor",
+    "genuine",
+    "tranquil",
+    "magnolia",
+    "infinity",
+    "marathon",
+    "sunshine",
+    "nectar",
+    "zeppelin",
+    "journey",
+    "blossom",
+    "adventure",
+    "wisdom",
+    "captivate",
+    "lullaby",
+    "illusion",
+    "whimsical",
+    "velvet",
+    "landscape",
+    "whispering",
+    "luminous",
+    "effervescent",
+    "cascade",
+    "breathtaking",
+    "orchestra",
+    "butterfly",
+    "miracle",
+    "reflection",
+    "majestic",
+    "melody",
+    "fascinate",
+    "enchantment",
+    "mesmerize",
+    "illuminate",
+    "serendipity",
+    "gratitude",
+    "inspiration",
+    "moonlight",
+    "soaring",
+    "enlighten",
+    "harmonize",
+    "stardust",
+    "bewitching",
+    "splendid",
+    "brilliance",
+    "glorious",
+    "mysterious",
+    "effulgent",
+    "enthrall",
+    "vibrant",
+    "whirlwind",
+    "charisma",
+    "ethereal",
+    "glisten",
+    "labyrinth",
+    "tranquility",
+    "celestial",
+    "catalyst",
+    "luminary",
+    "whimsy",
+    "efflorescent",
+    "mesmeric",
+    "ephemeral",
+    "serenity",
+    "enigma",
+    "quintessence",
+    "whisperer",
+    "aureate",
+    "ecstasy",
+    "mellifluous",
+    "rhapsody",
+    "cascade",
+    "ephemeral",
+    "solitude",
+    "zenith",
+    "exquisite",
+    "bravery",
+    "brevity",
+    "clarity",
+    "delight",
+    "eloquence",
+    "happiness",
+    "innocence",
+    "liberty",
+    "magnificent",
+    "nostalgia",
+    "opulent",
+    "patience",
+    "radiant",
+    "tranquil",
+    "vivid",
+    "wonder",
+    "zenith",
+    "adventure",
+    "blossom",
+    "celebrate",
+    "whimsical",
+    "captivating",
+    "effervescent",
+    "enchanting",
+    "fascinate",
+    "luminous",
+    "mesmerize",
+    "serenity",
+    "splendid",
+    "whisper",
+    "enigma",
+    "breathtaking",
+    "labyrinth",
+    "mysterious",
+    "ethereal",
+    "harmony",
+    "orchestra",
+    "rhapsody",
+    "tranquility",
+    "beauty",
+    "delight",
+    "elegance",
+    "grace",
+    "harmonize",
+    "inspiration",
+    "luminosity",
+    "serendipity",
+    "whimsy",
+    "radiance",
+    "zeppelin",
+    "effulgent",
+    "glisten",
+    "solitude",
+    "celestial",
+    "enthrall",
+    "giraffe",
+    "paradise",
+    "reflection",
+    "moonlight",
+    "efflorescent",
+    "brilliance",
+    "glorious",
+    "butterfly",
+    "miracle",
+    "majestic",
+    "melody",
+    "fascinate",
+    "enchantment",
+    "illuminate",
+    "whirlwind",
+    "charisma",
+    "luminary",
+    "bewitching",
+    "vibrant",
+    "ethereal",
+    "glisten",
+    "labyrinth",
+    "tranquility",
+    "celestial",
+    "catalyst",
+    "luminary",
+    "whimsy",
+    "efflorescent",
+    "mesmeric",
+    "ephemeral",
+    "serenity",
+    "enigma",
+    "quintessence",
+    "whisperer",
+    "aureate",
+    "ecstasy",
+    "enchanting",
+    "mellifluous",
+    "rhapsody",
+    "ebb",
+    "cascade",
+    "ephemeral",
+    "solitude",
+    "zenith",
+    "exquisite",
+    "bravery",
+    "brevity",
+    "clarity",
+    "delight",
+    "eloquence",
+    "happiness",
+    "innocence",
+    "liberty",
+    "magnificent",
+    "nostalgia",
+    "opulent",
+  ];
+}
+
+const words = initWords();
+
 let counter = 0;
 let randomNr = Math.floor(Math.random() * words.length);
 let wordOfTheDay = words[randomNr];
@@ -49,14 +252,11 @@ const boxes = document.querySelectorAll(".box");
 document.addEventListener("keypress", (e) => {
   if (gamestate) {
     let occurences = checkInput(e.key);
-    if (occurences.length === 0) {
+    if (occurences.length === 0 && alphabet.indexOf(e.key) !== -1) {
+      alphabet.splice(alphabet.indexOf(e.key), 1);
       svgPaths[counter].style.opacity = 1;
       counter++;
-
-      let letter = wrongGuess(e.key);
-      if (letter !== 0) {
-        wrongGuesses.innerHTML += `${letter} `;
-      }
+      wrongGuesses.innerHTML += `${e.key} `;
 
       if (counter === svgPaths.length) {
         gamestate = false;
@@ -132,18 +332,18 @@ function playAgain() {
   btn.style.display = "block";
 }
 
-function wrongGuess(letter) {
-  let index = alphabet.indexOf(letter);
-  if (index !== -1) {
-    let returnValue = alphabet[index];
-    alphabet.splice(index, 1);
-    return returnValue;
-  }
-  return 0;
-}
+// function wrongGuess(letter) {
+//   let index = alphabet.indexOf(letter);
+//   if (index !== -1) {
+//     let returnValue = alphabet[index];
+//     alphabet.splice(index, 1);
+//     return returnValue;
+//   }
+//   return 0;
+// }
 
 function removeOccurence(letter) {
-  while (currentState.indexOf(letter) > 0) {
+  while (currentState.indexOf(letter) !== -1) {
     currentState.splice(currentState.indexOf(letter), 1);
   }
   return letter;
